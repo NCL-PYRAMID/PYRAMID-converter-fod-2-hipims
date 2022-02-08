@@ -1,32 +1,46 @@
-# install relevent packages
+# Install Python packages
+import os
+import pathlib
+import shutil
+import csv
+
 import pandas as pd
 import numpy as np
-from os.path import join
-
 from shapely.geometry import Polygon, box, Point
 
-######## input variables to change
+# Setup base path
+platform = os.getenv("PLATFORM")
+if platform=="docker":
+    data_path = os.getenv("DATA_PATH", "/data")
+else:
+    data_path = os.getenv("DATA_PATH", "./data")
 
-# folder path for bounding box output (saved as seperate files for each grouping)
-folder_path = r"C:\Users\Amy\OneDrive - Newcastle University\Documents\PYRAMID\Shidong\Geospatial\Detection and Segmentation Results\BboxAndScore"
+# Data paths and files
+input_path = data_path / pathlib.Path("inputs")
+dsr_input_path = input_path / pathlib.Path("dsr")
+bbs_input_path = dsr_input_path / pathlib.Path("BboxAndScore")
+bbs_input_file = bbs_input_path / pathlib.Path("BboxAndScore_4.txt")
+data_file = input_path / pathlib.Path("sample_car_data.txt")
 
-# folder path for sample car data
-sample_data_path = r"C:\Users\Amy\OneDrive - Newcastle University\Documents\PYRAMID\sample_car_data.txt"
+output_path = data_path / pathlib.Path("outputs")
+results_file = output_path / pathlib.Path("vehicle_objects.txt")
 
-# output file path
-output_path = "vehicle_objects.txt"
+if output_path.exists() and output_path.is_dir():
+    shutil.rmtree(output_path)
+pathlib.Path.mkdir(output_path)
 
-# score threshold
+
+# Score threshold
 score_thresh = 0.8
 
-# percentage errors for similar cars
+# Percentage errors for similar cars
 err = 10  # error allowed (%)
 
 # read in sample car data
-sample_cars = pd.read_csv(sample_data_path, index_col=0)
+sample_cars = pd.read_csv(data_file, index_col=0)
 
 # read in detected objects (small vehicles only)
-small_vehicles = np.fromfile(join(folder_path, "BboxAndScore_4.txt"), sep=" ")
+small_vehicles = np.fromfile(bbs_input_file, sep=" ")
 small_vehicles = small_vehicles.reshape([int(small_vehicles.shape[0] / 9), 9])
 scores = small_vehicles[:, -1]
 bboxes = small_vehicles[:, 0:-1]
@@ -90,5 +104,5 @@ for i in range(scores.shape[0]):
                                "angle",
                                "score"]] = data
 
-# save output
-output.to_csv(output_path, index=False)
+# Save output
+output.to_csv(results_file, index=False)
