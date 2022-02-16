@@ -1,107 +1,105 @@
 
 
-# PYRAMID Standard Project
-A template repo for a standard PYRAMID project repo. Originally from https://github.com/NewcastleRSE/Standard-Project.
+# PYRAMID Deep Learning to HiPIMS data converter model
 
 ## About
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin ante at eleifend eleifend. Sed non vestibulum nisi. Aliquam vel condimentum quam. Donec fringilla et purus at auctor. Praesent euismod vitae metus non consectetur. Sed interdum aliquet nisl at efficitur. Nulla urna quam, gravida eget elementum eget, mattis nec tortor. Fusce ut neque tellus. Integer at magna feugiat lacus porta posuere eget vitae metus.
-
-Curabitur a tempus arcu. Maecenas blandit risus quam, quis convallis justo pretium in. Suspendisse rutrum, elit at venenatis cursus, dolor ligula iaculis dui, ut dignissim enim justo at ligula. Donec interdum dignissim egestas. Nullam nec ultrices enim. Nam quis arcu tincidunt, auctor purus sit amet, aliquam libero. Fusce rhoncus lectus ac imperdiet varius. Sed gravida urna eros, ac luctus justo condimentum nec. Integer ultrices nibh in neque sagittis, at pretium erat pretium. Praesent feugiat purus id iaculis laoreet. Proin in tellus tristique, congue ante in, sodales quam. Sed imperdiet est tortor, eget vestibulum tortor pulvinar volutpat. In et pretium nisl.
+This model takes output from the [DL object detection model](https://github.com/NCL-PYRAMID/PYRAMID-object-detection) in the form of a list of polygons (rectangles), and writes out these objects as floating debris models suitable for use in [HiPIMS](https://github.com/NCL-PYRAMID/PYRAMID-HiPIMS).
 
 ### Project Team
-Dr L. Ipsum, Newcastle University  ([lorem.ipsum@newcastle.ac.uk](mailto:lorem.ipsum@newcastle.ac.uk))  
-Professor D. Sit Amet, XY University  ([d.sit.amet@newcastle.ac.uk](mailto:d.sit.amet@example.com))  
+Amy Green, Newcastle University  ([a.c.brown@newcastle.ac.uk](mailto:a.c.brown@newcastle.ac.uk))  
+Xue Tong, Loughborough University ([x.tong2@lboro.ac.uk](mailto:x.tong2@lboro.ac.uk))  
+Shidong Wang, Newcastle University ([shidong.wang@newcastle.ac.uk](mailto:shidong.wang@newcastle.ac.uk))  
+Elizabeth Lewis, Newcastle University  ([elizabeth.lewis2@newcastle.ac.uk](mailto:elizabeth.lewis2@newcastle.ac.uk))  
 
 ### RSE Contact
-C. Adipiscing  
-RSE Team  
-Newcastle University  
-([consectetur.adpiscing@newcastle.ac.uk](mailto:consectetur.adpiscing@newcastle.ac.uk))  
+Robin Wardle  
+RSE Team, Newcastle Data  
+Newcastle University NE1 7RU  
+([robin.wardle@newcastle.ac.uk](mailto:robin.wardle@newcastle.ac.uk))  
 
 ## Built With
 
-This section is intended to list the frameworks and tools you're using to develop this software. Please link to the home page or documentatation in each case.
+[Python 3](https://www.python.org)  
+* [pandas](https://pandas.pydata.org)  
+* [numpy](https://numpy.org)  
+* [shapely](https://github.com/shapely/shapely)  
 
-[Framework 1](https://something.com)  
-[Framework 2](https://something.com)  
-[Framework 3](https://something.com)  
+[Docker](https://www.docker.com)  
+
+Other required tools: [tar](https://www.unix.com/man-page/linux/1/tar/), [zip](https://www.unix.com/man-page/linux/1/gzip/).
 
 ## Getting Started
 
 ### Prerequisites
-
-Any tools or versions of languages needed to run code. For example specific Python or Node versions. Minimum hardware requirements also go here.
+The `requirements.txt` file lists the Python and module versions required.
 
 ### Installation
-
-How to build or install the applcation.
+The application is a Python 3 script and needs no installation for local execution. Deployment to DAFNI is covered below.
 
 ### Running Locally
+The model can be run from the command-line as
 
-How to run the application on your local system.
+```
+python bbox_to_object.py
+```
+
+The results of the processing are written to a file:
+
+```
+./data/outputs/vehicle_objects.txt
+```
 
 ### Running Tests
+Some default data for testing is in
 
-How to run tests on your local system.
+```
+./data/inputs
+```
+
+There are no unit test cases for this model at present.
 
 ## Deployment
 
 ### Local
+A local Docker container that mounts the test data can be built and executed using:
 
-#### Preparation for upload to DAFNI
+```
 docker build . -t pyramid-dl-2-hipims
-
 docker run -v "$(pwd)/data:/data" pyramid-dl-2-hipims
+```
 
-docker save -o pyramid-dl-2-hipims.tar pyramid-dl-2-hipims:latest
-
-gzip pyramid-dl-2-hipims.tar
+Note that output from the container, placed in the `./data` subdirectory, will have `root` ownership as a result of the way in which Docker's access permissions work.
 
 ### Production
+#### DAFNI upload
+The model is containerised using Docker, and the image is _tar_'ed and _zip_'ed for uploading to DAFNI. Use the following commands in a *nix shell to accomplish this.
 
-Deploying to the production system. Examples of this would include cloud, HPC or virtual machine. 
+```
+docker build . -t pyramid-dl-2-hipims
+docker save -o pyramid-dl-2-hipims.tar pyramid-dl-2-hipims:latest
+gzip pyramid-dl-2-hipims.tar
+```
+
+The `pyramid-dl-2-hipims.tar.gz` Docker image and accompanying DAFNI model definintion file (`model-definition.yml`) can be uploaded as a new model using the "Add model" facility at [https://facility.secure.dafni.rl.ac.uk/models/](https://facility.secure.dafni.rl.ac.uk/models/).
 
 ## Usage
-
-Any links to production environment, video demos and screenshots.
+The deployed model can be run in a DAFNI workflow. See the [DAFNI workflow documentation](https://docs.secure.dafni.rl.ac.uk/docs/how-to/how-to-create-a-workflow) for details.
 
 ## Roadmap
-
 - [x] Initial Research  
 - [ ] Minimum viable product <-- You are Here  
 - [ ] Alpha Release  
 - [ ] Feature-Complete Release  
 
 ## Contributing
+TBD
 
 ### Main Branch
-Protected and can only be pushed to via pull requests. Should be considered stable and a representation of production code.
-
-### Dev Branch
-Should be considered fragile, code should compile and run but features may be prone to errors.
-
-### Feature Branches
-A branch per feature being worked on.
-
-https://nvie.com/posts/a-successful-git-branching-model/
+All development can take place on the main branch. 
 
 ## License
-
-## Citiation
-
-Please cite the associated papers for this work if you use this code:
-
-```
-@article{xxx2021paper,
-  title={Title},
-  author={Author},
-  journal={arXiv},
-  year={2021}
-}
-```
-
+This code is private to the PYRAMID project.
 
 ## Acknowledgements
-This work was funded by a grant from the UK Research Councils, EPSRC grant ref. EP/L012345/1, “Example project title, please update”.
+This work was funded by NERC, grant ref. NE/V00378X/1, “PYRAMID: Platform for dYnamic, hyper-resolution, near-real time flood Risk AssessMent Integrating repurposed and novel Data sources”. See the project funding [URL](https://gtr.ukri.org/projects?ref=NE/V00378X/1).
 
