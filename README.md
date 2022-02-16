@@ -1,31 +1,28 @@
 
 
-# PYRAMID Standard Project
-A template repo for a standard PYRAMID project repo. Originally from https://github.com/NewcastleRSE/Standard-Project.
+# PYRAMID Deep Learning to HiPIMS data converter model
 
 ## About
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sollicitudin ante at eleifend eleifend. Sed non vestibulum nisi. Aliquam vel condimentum quam. Donec fringilla et purus at auctor. Praesent euismod vitae metus non consectetur. Sed interdum aliquet nisl at efficitur. Nulla urna quam, gravida eget elementum eget, mattis nec tortor. Fusce ut neque tellus. Integer at magna feugiat lacus porta posuere eget vitae metus.
-
-Curabitur a tempus arcu. Maecenas blandit risus quam, quis convallis justo pretium in. Suspendisse rutrum, elit at venenatis cursus, dolor ligula iaculis dui, ut dignissim enim justo at ligula. Donec interdum dignissim egestas. Nullam nec ultrices enim. Nam quis arcu tincidunt, auctor purus sit amet, aliquam libero. Fusce rhoncus lectus ac imperdiet varius. Sed gravida urna eros, ac luctus justo condimentum nec. Integer ultrices nibh in neque sagittis, at pretium erat pretium. Praesent feugiat purus id iaculis laoreet. Proin in tellus tristique, congue ante in, sodales quam. Sed imperdiet est tortor, eget vestibulum tortor pulvinar volutpat. In et pretium nisl.
+This model takes output from the [DL object detection model](https://github.com/NCL-PYRAMID/PYRAMID-object-detection) in the form of a list of polygons (rectangles), and writes out these objects as floating debris models suitable for use in [HiPIMS](https://github.com/NCL-PYRAMID/PYRAMID-HiPIMS).
 
 ### Project Team
-Dr L. Ipsum, Newcastle University  ([lorem.ipsum@newcastle.ac.uk](mailto:lorem.ipsum@newcastle.ac.uk))  
-Professor D. Sit Amet, XY University  ([d.sit.amet@newcastle.ac.uk](mailto:d.sit.amet@example.com))  
+Amy Green, Newcastle University  ([a.c.brown@newcastle.ac.uk](mailto:a.c.brown@newcastle.ac.uk))  
+Xue Tong, Loughborough University ([x.tong2@lboro.ac.uk](mailto:x.tong2@lboro.ac.uk))  
+Shidong Wang, Newcastle University ([shidong.wang@newcastle.ac.uk](mailto:shidong.wang@newcastle.ac.uk))  
+Elizabeth Lewis, Newcastle University  ([elizabeth.lewis2@newcastle.ac.uk](mailto:elizabeth.lewis2@newcastle.ac.uk))  
 
 ### RSE Contact
-C. Adipiscing  
-RSE Team  
-Newcastle University  
-([consectetur.adpiscing@newcastle.ac.uk](mailto:consectetur.adpiscing@newcastle.ac.uk))  
+Robin Wardle  
+RSE Team, Newcastle Data  
+Newcastle University NE1 7RU  
+([robin.wardle@newcastle.ac.uk](mailto:robin.wardle@newcastle.ac.uk))  
 
 ## Built With
 
-This section is intended to list the frameworks and tools you're using to develop this software. Please link to the home page or documentatation in each case.
-
-[Framework 1](https://something.com)  
-[Framework 2](https://something.com)  
-[Framework 3](https://something.com)  
+[Python 3](https://www.python.org)  
+* [pandas](https://pandas.pydata.org)  
+* [numpy](https://numpy.org)  
+* [shapely](https://github.com/shapely/shapely)  
 
 ## Getting Started
 
