@@ -23,6 +23,7 @@ Newcastle University NE1 7RU
 * [pandas](https://pandas.pydata.org)  
 * [numpy](https://numpy.org)  
 * [shapely](https://github.com/shapely/shapely)  
+
 [Docker](https://www.docker.com)  
 
 Other required tools: [tar](https://www.unix.com/man-page/linux/1/tar/), [zip](https://www.unix.com/man-page/linux/1/gzip/).
@@ -30,11 +31,10 @@ Other required tools: [tar](https://www.unix.com/man-page/linux/1/tar/), [zip](h
 ## Getting Started
 
 ### Prerequisites
-
-Any tools or versions of languages needed to run code. For example specific Python or Node versions. Minimum hardware requirements also go here.
+The `requirements.txt` file lists the Python and module versions required.
 
 ### Installation
-The application is a Python 3 script and needs no installation.
+The application is a Python 3 script and needs no installation for local execution. Deployment to DAFNI is covered below.
 
 ### Running Locally
 The model can be run from the command-line as
@@ -83,45 +83,23 @@ gzip pyramid-dl-2-hipims.tar
 The `pyramid-dl-2-hipims.tar.gz` Docker image and accompanying DAFNI model definintion file (`model-definition.yml`) can be uploaded as a new model using the "Add model" facility at [https://facility.secure.dafni.rl.ac.uk/models/](https://facility.secure.dafni.rl.ac.uk/models/).
 
 ## Usage
-
-Any links to production environment, video demos and screenshots.
+The deployed model can be run in a DAFNI workflow. See the [DAFNI workflow documentation](https://docs.secure.dafni.rl.ac.uk/docs/how-to/how-to-create-a-workflow) for details.
 
 ## Roadmap
-
 - [x] Initial Research  
 - [ ] Minimum viable product <-- You are Here  
 - [ ] Alpha Release  
 - [ ] Feature-Complete Release  
 
 ## Contributing
+TBD
 
 ### Main Branch
-Protected and can only be pushed to via pull requests. Should be considered stable and a representation of production code.
-
-### Dev Branch
-Should be considered fragile, code should compile and run but features may be prone to errors.
-
-### Feature Branches
-A branch per feature being worked on.
-
-https://nvie.com/posts/a-successful-git-branching-model/
+All development can take place on the main branch. 
 
 ## License
-
-## Citiation
-
-Please cite the associated papers for this work if you use this code:
-
-```
-@article{xxx2021paper,
-  title={Title},
-  author={Author},
-  journal={arXiv},
-  year={2021}
-}
-```
-
+This code is private to the the PYRAMID project.
 
 ## Acknowledgements
-This work was funded by a grant from the UK Research Councils, EPSRC grant ref. EP/L012345/1, “Example project title, please update”.
+This work was funded by NERC, grant ref. NE/V00378X/1, “PYRAMID: Platform for dYnamic, hyper-resolution, near-real time flood Risk AssessMent Integrating repurposed and novel Data sources”. See the project funding [URL](https://gtr.ukri.org/projects?ref=NE/V00378X/1).
 
