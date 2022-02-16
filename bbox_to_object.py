@@ -1,13 +1,26 @@
+###############################################################################
+# Deep Learning model to HiPIMS data converter
+# Amy Green, Robin Wardle
+# February 2022
+###############################################################################
+
+###############################################################################
 # Install Python packages
+###############################################################################
 import os
 import pathlib
 import shutil
 import csv
+import zipfile
 
 import pandas as pd
 import numpy as np
 from shapely.geometry import Polygon, box, Point
 
+
+###############################################################################
+# Paths
+###############################################################################
 # Setup base path
 platform = os.getenv("PLATFORM")
 if platform=="docker":
@@ -29,7 +42,16 @@ if output_path.exists() and output_path.is_dir():
     shutil.rmtree(output_path)
 pathlib.Path.mkdir(output_path)
 
+# Unzip the input data if it exists as a dataslot
+zipfile_dir = pathlib.Path("./data/inputs")
+zipfile_name = pathlib.Path("dl-outputs-sample.zip")
+with zipfile.ZipFile(zipfile_dir / zipfile_name, 'r') as zip_ref:
+    zip_ref.extractall(zipfile_dir)
 
+
+###############################################################################
+# Processing
+###############################################################################
 # Score threshold
 score_thresh = 0.8
 
@@ -104,5 +126,7 @@ for i in range(scores.shape[0]):
                                "angle",
                                "score"]] = data
 
-# Save output
+###############################################################################
+# Output
+###############################################################################
 output.to_csv(results_file, index=False)

@@ -1,0 +1,20 @@
+kind: Model
+api_version: v1beta1
+metadata:
+  display_name: Converter - Deep Learning to HiPIMS
+  name: converter-dl-2-hipims
+  summary: A converter which takes the geometry produced by the DL object identification tool and produces HiPIMS-ready data for floating debris studies.
+  publisher: Newcastle University
+  description: >
+    A description of the converter is needed here.
+spec:
+  inputs:
+    dataslots:
+      - name: Geometry data for movable objects
+        description: >
+          Description of the dataset format
+        default:
+          - 1cce13d9-2c95-4af5-b103-67aeb50e7d15
+        path: inputs
+        required: true
+
