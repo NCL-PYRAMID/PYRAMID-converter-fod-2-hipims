@@ -98,7 +98,7 @@ TBD
 All development can take place on the main branch. 
 
 ## License
-This code is private to the the PYRAMID project.
+This code is private to the PYRAMID project.
 
 ## Acknowledgements
 This work was funded by NERC, grant ref. NE/V00378X/1, “PYRAMID: Platform for dYnamic, hyper-resolution, near-real time flood Risk AssessMent Integrating repurposed and novel Data sources”. See the project funding [URL](https://gtr.ukri.org/projects?ref=NE/V00378X/1).
