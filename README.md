@@ -23,6 +23,9 @@ Newcastle University NE1 7RU
 * [pandas](https://pandas.pydata.org)  
 * [numpy](https://numpy.org)  
 * [shapely](https://github.com/shapely/shapely)  
+[Docker](https://www.docker.com)  
+
+Other required tools: [tar](https://www.unix.com/man-page/linux/1/tar/), [zip](https://www.unix.com/man-page/linux/1/gzip/).
 
 ## Getting Started
 
@@ -31,33 +34,53 @@ Newcastle University NE1 7RU
 Any tools or versions of languages needed to run code. For example specific Python or Node versions. Minimum hardware requirements also go here.
 
 ### Installation
-
-How to build or install the applcation.
+The application is a Python 3 script and needs no installation.
 
 ### Running Locally
+The model can be run from the command-line as
 
-How to run the application on your local system.
+```
+python bbox_to_object.py
+```
+
+The results of the processing are written to a file:
+
+```
+./data/outputs/vehicle_objects.txt
+```
 
 ### Running Tests
+Some default data for testing is in
 
-How to run tests on your local system.
+```
+./data/inputs
+```
+
+There are no unit test cases for this model at present.
 
 ## Deployment
 
 ### Local
+A local Docker container that mounts the test data can be built and executed using:
 
-#### Preparation for upload to DAFNI
+```
 docker build . -t pyramid-dl-2-hipims
-
 docker run -v "$(pwd)/data:/data" pyramid-dl-2-hipims
+```
 
-docker save -o pyramid-dl-2-hipims.tar pyramid-dl-2-hipims:latest
-
-gzip pyramid-dl-2-hipims.tar
+Note that output from the container, placed in the `./data` subdirectory, will have `root` ownership as a result of the way in which Docker's access permissions work.
 
 ### Production
+#### DAFNI upload
+The model is containerised using Docker, and the image is _tar_'ed and _zip_'ed for uploading to DAFNI. Use the following commands in a *nix shell to accomplish this.
 
-Deploying to the production system. Examples of this would include cloud, HPC or virtual machine. 
+```
+docker build . -t pyramid-dl-2-hipims
+docker save -o pyramid-dl-2-hipims.tar pyramid-dl-2-hipims:latest
+gzip pyramid-dl-2-hipims.tar
+```
+
+The `pyramid-dl-2-hipims.tar.gz` Docker image and accompanying DAFNI model definintion file (`model-definition.yml`) can be uploaded as a new model using the "Add model" facility at [https://facility.secure.dafni.rl.ac.uk/models/](https://facility.secure.dafni.rl.ac.uk/models/).
 
 ## Usage
 
