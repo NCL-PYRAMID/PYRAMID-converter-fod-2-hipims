@@ -45,8 +45,9 @@ pathlib.Path.mkdir(output_path)
 # Unzip the input data if it exists as a dataslot
 zipfile_dir = pathlib.Path("./data/inputs")
 zipfile_name = pathlib.Path("dl-outputs-sample.zip")
-with zipfile.ZipFile(zipfile_dir / zipfile_name, 'r') as zip_ref:
-    zip_ref.extractall(zipfile_dir)
+if pathlib.Path(zipfile_dir / zipfile_name).exists():
+    with zipfile.ZipFile(zipfile_dir / zipfile_name, 'r') as zip_ref:
+        zip_ref.extractall(zipfile_dir)
 
 
 ###############################################################################
