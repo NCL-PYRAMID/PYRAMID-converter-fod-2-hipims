@@ -12,6 +12,7 @@ import pathlib
 import shutil
 import csv
 import zipfile
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -128,6 +129,74 @@ for i in range(scores.shape[0]):
                                "score"]] = data
 
 ###############################################################################
-# Output
+# Output results file
 ###############################################################################
 output.to_csv(results_file, index=False)
+
+
+###############################################################################
+# Create metadata file
+# Originally taken from the CITYCAT project:
+#  https://github.com/OpenCLIM/citycat-dafni
+###############################################################################
+app_title = "pyramid-dl-2-hipims"
+app_description = "Default dataslot test output"
+metadata = f"""{{
+  "@context": ["metadata-v1"],
+  "@type": "dcat:Dataset",
+  "dct:title": "{app_title}",
+  "dct:description": "{app_description}",
+  "dct:identifier":[],
+  "dct:subject": "Environment",
+  "dcat:theme":[],
+  "dct:language": "en",
+  "dcat:keyword": ["PYRAMID"],
+  "dct:conformsTo": {{
+    "@id": null,
+    "@type": "dct:Standard",
+    "label": null
+  }}
+  "dct:spatial": {{
+    "@id": null,
+    "@type": "dct:Location",
+    "rdfs:label": null
+  }},
+  "geojson": {{}},
+  "dct:PeriodOfTime": {{
+    "type": "dct:PeriodOfTime",
+    "time:hasBeginning": null,
+    "time:hasEnd": null
+  }},
+  "dct:accrualPeriodicity": null,
+  "dct:creator": [
+    {{
+      "@type": "foaf:Organization",
+      "@id": "http://www.ncl.ac.uk/",
+      "foaf:name": "Newcastle University",
+      "internalID": null
+    }}
+  ],
+  "dct:created": "{datetime.now().isoformat()}Z",
+  "dct:publisher":{{
+    "@id": null,
+    "@type": "foaf:Organization",
+    "foaf:name": null,
+    "internalID": null
+  }},
+  "dcat:contactPoint": {{
+    "@type": "vcard:Organization",
+    "vcard:fn": "DAFNI",
+    "vcard:hasEmail": "support@dafni.ac.uk"
+  }},
+  "dct:license": {{
+    "@type": "LicenseDocument",
+    "@id": "https://creativecommons.org/licences/by/4.0/",
+    "rdfs:label": null
+  }},
+  "dct:rights": null,
+  "dafni_version_note": "created"
+}}
+"""
+
+with open(os.path.join(output_path, 'metadata.json'), 'w') as f:
+    f.write(metadata)
