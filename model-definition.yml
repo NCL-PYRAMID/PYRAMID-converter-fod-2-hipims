@@ -9,6 +9,13 @@ metadata:
     A description of the converter is needed here.
 spec:
   inputs:
+    parameters:
+      - name: NAME
+        title: Run name
+        type: string
+        description: Name for the run, used in the title field of the metadata file.
+        default: PYRAMID dl-2-hipims output
+        required: true
     dataslots:
       - name: Geometry data for movable objects
         description: >
@@ -17,4 +24,11 @@ spec:
           - 1cce13d9-2c95-4af5-b103-67aeb50e7d15
         path: inputs
         required: true
-
+  outputs:
+    datasets:
+      - name: outputs/metadata.json
+        type: JSON
+        description: Metadata for the outputs
+      - name: outputs/vehicle_objects.txt
+        type: text
+        description: Floating objects geometry

@@ -29,26 +29,28 @@ if platform=="docker":
 else:
     data_path = os.getenv("DATA_PATH", "./data")
 
-# Data paths and files
+# INPUT data paths and files
 input_path = data_path / pathlib.Path("inputs")
 dsr_input_path = input_path / pathlib.Path("dsr")
 bbs_input_path = dsr_input_path / pathlib.Path("BboxAndScore")
 bbs_input_file = bbs_input_path / pathlib.Path("BboxAndScore_4.txt")
 data_file = input_path / pathlib.Path("sample_car_data.txt")
 
-output_path = data_path / pathlib.Path("outputs")
-results_file = output_path / pathlib.Path("vehicle_objects.txt")
+# DAFNI test dataset - unzip the sample data file
+zipfile_name = pathlib.Path("dl-outputs-sample.zip")
+if pathlib.Path(input_path / zipfile_name).exists():
+    with zipfile.ZipFile(input_path / zipfile_name, 'r') as zip_ref:
+        zip_ref.extractall(input_path)
 
+# OUTPUT data paths and files
+output_path = data_path / pathlib.Path("outputs")
+
+# Remove the output path if it exists, and create a new one
 if output_path.exists() and output_path.is_dir():
     shutil.rmtree(output_path)
 pathlib.Path.mkdir(output_path)
 
-# Unzip the input data if it exists as a dataslot
-zipfile_dir = pathlib.Path("./data/inputs")
-zipfile_name = pathlib.Path("dl-outputs-sample.zip")
-if pathlib.Path(zipfile_dir / zipfile_name).exists():
-    with zipfile.ZipFile(zipfile_dir / zipfile_name, 'r') as zip_ref:
-        zip_ref.extractall(zipfile_dir)
+results_file = output_path / pathlib.Path("vehicle_objects.txt")
 
 
 ###############################################################################
@@ -155,7 +157,7 @@ metadata = f"""{{
     "@id": null,
     "@type": "dct:Standard",
     "label": null
-  }}
+  }},
   "dct:spatial": {{
     "@id": null,
     "@type": "dct:Location",
