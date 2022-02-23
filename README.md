@@ -50,13 +50,24 @@ The results of the processing are written to a file:
 ```
 
 ### Running Tests
-Some default data for testing is in
+There are no unit test cases for this model at present. Some default data for testing are in
 
 ```
 ./data/inputs
 ```
 
-There are no unit test cases for this model at present.
+These data are zipped into a file used for DAFNI testing:
+
+```
+./dl-outputs-sample.zip
+```
+
+Any changes to the data in `./data/inputs` should be reflected in the creation of a new './dl-outputs-sample.zip` file. The production of this file may be automated in GitHub in future.
+
+The test data is used in the following ways:
+* When testing locally, data files are read from and written to the `./data` directory.
+* When testing a local Docker container, `./data` is mounted to `/data` within the container, and again data are read from and written to this directory.
+* A test DAFNI dataset (parent ID: `aaae7615-09c1-4a04-b99f-4ae1da6493ee`, "PYRAMID deep learning model sample outputs") is used as a default input to the model when testing on the DAFNI platform. A workflow must be created to run the model. Updates to this dataset will require an update to the corresponding dataset version ID in the model `model-definition.yml` file.
 
 ## Deployment
 
@@ -85,9 +96,13 @@ The `pyramid-dl-2-hipims.tar.gz` Docker image and accompanying DAFNI model defin
 ## Usage
 The deployed model can be run in a DAFNI workflow. See the [DAFNI workflow documentation](https://docs.secure.dafni.rl.ac.uk/docs/how-to/how-to-create-a-workflow) for details.
 
+When running the model as part of a larger workflow receiving data from the PYRAMID deep learning component, all data supplied to the model will appear in the folder `/data/inputs`, exactly as produced by the deep learning model. The outputs of this converter must be written to the `/data/outputs` folder within the Docker container. When testing locally, these paths are instead `./data/inputs' and './data/outputs' respectively. The Python script is able to determine which directory to use by checking the environment variable `PLATFORM`, which is set in the Dockerfile.
+
+Model outputs in `/data/outputs` should contain the actual data produced by the converter, as well as a `metadata.json` file which is used by DAFNI in publishing steps when creating a new dataset from the data produced by the model.
+
 ## Roadmap
 - [x] Initial Research  
-- [ ] Minimum viable product <-- You are Here  
+- [x] Minimum viable product <-- You are Here  
 - [ ] Alpha Release  
 - [ ] Feature-Complete Release  
 
