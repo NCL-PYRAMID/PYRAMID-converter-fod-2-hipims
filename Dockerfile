@@ -14,4 +14,4 @@ RUN pip install -r requirements.txt
 
 ENV PLATFORM="docker"
 
-CMD python bbox_to_object.py
+CMD ["python" "-u" "bbox_to_object.py"]
