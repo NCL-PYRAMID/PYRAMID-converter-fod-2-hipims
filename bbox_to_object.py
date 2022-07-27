@@ -8,7 +8,8 @@
 # Install Python packages
 ###############################################################################
 import os
-import pathlib
+# import pathlib
+from pathlib import Path
 import shutil
 import csv
 import zipfile
@@ -29,6 +30,23 @@ if platform=="docker":
 else:
     data_path = os.getenv("DATA_PATH", "./data")
 
+    
+# INPUT imagery names
+img_name = ['Z2463', 'Z2464', 'Z2465', 'Z2563', 'Z2564', 'Z2565', 'Z2664']
+dota_1_0_res, dota_1_5_res = [], []
+
+# INPUT data paths and files
+input_path = dl_output_data_path / Path("pyramid-floating-object-detection")
+input_path_src1_0 = input_path / Path("dota_1_0_res")
+for i range(len(img_name)):
+    with open(Path(input_path_src1_0, "BboxAndScore_{}._{}.txt".format(i, 4)), "r") as f10:
+        dota_1_0_res = f10.readlines()
+
+input_path_src1_5 = input_path / Path("dota_1_5_res")
+for j range(len(img_name)):
+    with open(Path(input_path_src1_5, "BboxAndScore_{}._{}.txt".format(img_name[i], 4)), "r") as f15:
+        dota_1_5_res = f15.readlines()
+"""
 # INPUT data paths and files
 input_path = data_path / pathlib.Path("inputs")
 dsr_input_path = input_path / pathlib.Path("dsr")
@@ -44,14 +62,16 @@ if pathlib.Path(input_path / zipfile_name).exists():
 
 # OUTPUT data paths and files
 output_path = data_path / pathlib.Path("outputs")
+"""
 
+output_path = data_path / Path("dl_postproccessed_outputs")
 # Remove the output path if it exists, and create a new one
 if output_path.exists() and output_path.is_dir():
     shutil.rmtree(output_path)
 pathlib.Path.mkdir(output_path)
 
-results_file = output_path / pathlib.Path("vehicle_objects.txt")
-
+results_file_1_0 = output_path / pathlib.Path("vehicle_objects_1_0.txt")
+results_file_1_5 = output_path / pathlib.Path("vehicle_objects_1_5.txt")
 
 ###############################################################################
 # Processing
@@ -133,8 +153,8 @@ for i in range(scores.shape[0]):
 ###############################################################################
 # Output results file
 ###############################################################################
-output.to_csv(results_file, index=False)
-
+output.to_csv(results_file_1_0, index=False)
+output.to_csv(results_file_1_5, index=False)
 
 ###############################################################################
 # Create metadata file
