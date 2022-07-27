@@ -64,7 +64,7 @@ if pathlib.Path(input_path / zipfile_name).exists():
 output_path = data_path / pathlib.Path("outputs")
 """
 
-output_path = data_path / Path("dl_postproccessed_outputs")
+output_path = data_path / Path("outputs")
 # Remove the output path if it exists, and create a new one
 if output_path.exists() and output_path.is_dir():
     shutil.rmtree(output_path)
