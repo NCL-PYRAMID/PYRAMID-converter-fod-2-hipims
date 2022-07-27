@@ -3,6 +3,8 @@ name: Upload to DAFNI
 on:
   release:
     types: [published]
+    
+  workflow_dispatch:
 
 jobs:
   release:
@@ -29,4 +31,4 @@ jobs:
           username: ${{ secrets.DAFNI_SERVICE_ACCOUNT_USERNAME }}
           password: ${{ secrets.DAFNI_SERVICE_ACCOUNT_PASSWORD }}
           version-message: ${{ env.TAG }}
-          parent-model: ""
+          parent-model: "c834816c-eb82-4f07-96aa-72f13020afa4"
