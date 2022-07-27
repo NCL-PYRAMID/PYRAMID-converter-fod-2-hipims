@@ -39,7 +39,7 @@ dota_1_0_res, dota_1_5_res = [], []
 input_path = dl_output_data_path / Path("pyramid-floating-object-detection")
 input_path_src1_0 = input_path / Path("dota_1_0_res")
 for i range(len(img_name)):
-    with open(Path(input_path_src1_0, "BboxAndScore_{}._{}.txt".format(i, 4)), "r") as f10:
+    with open(Path(input_path_src1_0, "BboxAndScore_{}._{}.txt".format(img_name[i], 4)), "r") as f10:
         dota_1_0_res = f10.readlines()
 
 input_path_src1_5 = input_path / Path("dota_1_5_res")
