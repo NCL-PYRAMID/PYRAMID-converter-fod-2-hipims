@@ -7,5 +7,5 @@ Shapely==1.8.0
 pathlib
 # shutil
 zip_files
-csv
+# csv
 shapely
