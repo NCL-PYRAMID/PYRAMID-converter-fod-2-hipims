@@ -10,7 +10,7 @@
 import os
 # import pathlib
 from pathlib import Path
-import shutil
+# import shutil
 import csv
 import zipfile
 from datetime import datetime
@@ -41,7 +41,8 @@ input_path_src1_0 = input_path / Path("dota_1_0_res")
 output_path = data_path / Path("outputs")
 # Remove the output path if it exists, and create a new one
 if output_path.exists() and output_path.is_dir():
-    shutil.rmtree(output_path)
+    # shutil.rmtree(output_path)
+    os.remove(output_path)
 pathlib.Path.mkdir(output_path)
 
 results_file_1_0 = output_path / pathlib.Path("vehicle_objects_1_0.txt")
