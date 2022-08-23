@@ -1,9 +1,9 @@
 
 
-# PYRAMID Deep Learning to HiPIMS data converter model
+# PYRAMID Floating Object Detection to HiPIMS data converter model
 
 ## About
-This model takes output from the [DL object detection model](https://github.com/NCL-PYRAMID/PYRAMID-object-detection) in the form of a list of polygons (rectangles), and writes out these objects as floating debris models suitable for use in [HiPIMS](https://github.com/NCL-PYRAMID/PYRAMID-HiPIMS).
+This model takes output from the [floating object detection model](https://github.com/NCL-PYRAMID/PYRAMID-object-detection) in the form of a list of polygons (rectangles), and writes out these objects as floating debris models suitable for use in [HiPIMS](https://github.com/NCL-PYRAMID/PYRAMID-HiPIMS).
 
 ### Project Team
 Amy Green, Newcastle University  ([a.c.brown@newcastle.ac.uk](mailto:a.c.brown@newcastle.ac.uk))  
@@ -59,10 +59,10 @@ There are no unit test cases for this model at present. Some default data for te
 These data are zipped into a file used for DAFNI testing:
 
 ```
-./dl-outputs-sample.zip
+./fod-outputs-sample.zip
 ```
 
-Any changes to the data in `./data/inputs` should be reflected in the creation of a new './dl-outputs-sample.zip` file. The production of this file may be automated in GitHub in future.
+Any changes to the data in `./data/inputs` should be reflected in the creation of a new './fod-outputs-sample.zip` file. The production of this file may be automated in GitHub in future.
 
 The test data is used in the following ways:
 * When testing locally, data files are read from and written to the `./data` directory.
@@ -75,8 +75,8 @@ The test data is used in the following ways:
 A local Docker container that mounts the test data can be built and executed using:
 
 ```
-docker build . -t pyramid-dl-2-hipims
-docker run -v "$(pwd)/data:/data" pyramid-dl-2-hipims
+docker build . -t pyramid-fod-2-hipims
+docker run -v "$(pwd)/data:/data" pyramid-fod-2-hipims
 ```
 
 Note that output from the container, placed in the `./data` subdirectory, will have `root` ownership as a result of the way in which Docker's access permissions work.
@@ -86,12 +86,12 @@ Note that output from the container, placed in the `./data` subdirectory, will h
 The model is containerised using Docker, and the image is _tar_'ed and _zip_'ed for uploading to DAFNI. Use the following commands in a *nix shell to accomplish this.
 
 ```
-docker build . -t pyramid-dl-2-hipims
-docker save -o pyramid-dl-2-hipims.tar pyramid-dl-2-hipims:latest
-gzip pyramid-dl-2-hipims.tar
+docker build . -t pyramid-fod-2-hipims
+docker save -o pyramid-fod-2-hipims.tar pyramid-fod-2-hipims:latest
+gzip pyramid-fod-2-hipims.tar
 ```
 
-The `pyramid-dl-2-hipims.tar.gz` Docker image and accompanying DAFNI model definintion file (`model-definition.yml`) can be uploaded as a new model using the "Add model" facility at [https://facility.secure.dafni.rl.ac.uk/models/](https://facility.secure.dafni.rl.ac.uk/models/).
+The `pyramid-fod-2-hipims.tar.gz` Docker image and accompanying DAFNI model definintion file (`model-definition.yml`) can be uploaded as a new model using the "Add model" facility at [https://facility.secure.dafni.rl.ac.uk/models/](https://facility.secure.dafni.rl.ac.uk/models/).
 
 ## Usage
 The deployed model can be run in a DAFNI workflow. See the [DAFNI workflow documentation](https://docs.secure.dafni.rl.ac.uk/docs/how-to/how-to-create-a-workflow) for details.
