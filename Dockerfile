@@ -1,17 +1,17 @@
 FROM python:3.8-slim
 
-RUN mkdir /app
+RUN mkdir -p /data/inputs
+RUN mkdir -p /data/outputs
 
 WORKDIR /app
 
 COPY ./bbox_to_object.py ./
 COPY ./requirements.txt ./
-
-COPY ./dl-outputs-sample.zip ./
+COPY ./sample_car_data.txt ./
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 ENV PLATFORM="docker"
 
-CMD ["python" "-u" "bbox_to_object.py"]
+ENTRYPOINT ["python","-u","bbox_to_object.py"]
