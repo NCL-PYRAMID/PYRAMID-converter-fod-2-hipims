@@ -3,10 +3,10 @@ api_version: v1beta1
 metadata:
   display_name: PYRAMID <converter> FOD to HiPIMS
   name: pyramid-converter-fod-2-hipims
-  summary: A converter which takes the geometry produced by the Floating Object Detection (FOD) model and produces HiPIMS-ready data for floating debris studies.
+  summary: Converts Floating Object Detection (FOD) results to HiPIMS inputs
   publisher: Newcastle University
   description: >
-    A description of the converter is needed here.
+    A converter which takes the geometry produced by the Floating Object Detection (FOD) model and produces HiPIMS-ready data for floating debris studies.
 spec:
   inputs:
     parameters:
