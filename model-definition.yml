@@ -1,9 +1,9 @@
 kind: Model
 api_version: v1beta1
 metadata:
-  display_name: Converter - Deep Learning to HiPIMS
-  name: converter-dl-2-hipims
-  summary: A converter which takes the geometry produced by the DL object identification tool and produces HiPIMS-ready data for floating debris studies.
+  display_name: PYRAMID <converter> FOD to HiPIMS
+  name: pyramid-converter-fod-2-hipims
+  summary: A converter which takes the geometry produced by the Floating Object Detection (FOD) model and produces HiPIMS-ready data for floating debris studies.
   publisher: Newcastle University
   description: >
     A description of the converter is needed here.
@@ -14,21 +14,17 @@ spec:
         title: Run name
         type: string
         description: Name for the run, used in the title field of the metadata file.
-        default: PYRAMID dl-2-hipims output
+        default: PYRAMID <converter> fod-2-hipims
         required: true
     dataslots:
       - name: Geometry data for movable objects
         description: >
           Description of the dataset format
         default:
-          - 1cce13d9-2c95-4af5-b103-67aeb50e7d15
+          - 77700b07-56a2-4d2a-bc89-2627d4f232b3
         path: inputs
         required: true
   outputs:
     datasets:
-      - name: outputs/metadata.json
-        type: JSON
-        description: Metadata for the outputs
-      - name: outputs/vehicle_objects.txt
-        type: text
-        description: Floating objects geometry
+      - name: PYRAMID <converter> FOD to HiPIMS output
+        description: Converted FOD geometry into floating object form
