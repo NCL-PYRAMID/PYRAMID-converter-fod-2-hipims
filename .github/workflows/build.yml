@@ -1,4 +1,4 @@
-name: Build Docker image
+name: Build Docker Image
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     - name: checkout
       uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag pyramid-converter-dl-2-hipims
+      run: docker build . --file Dockerfile --tag pyramid-converter-fod-2-hipims
     # Testing removed temporarily.
     # To test successfully, an appropriate dataset will need to be downloaded from DAFNI
     # and mounted properly into the Docker container.
