@@ -192,8 +192,8 @@ def post_processing(data_file, bbs_input_file, results_file):
 #  https://github.com/OpenCLIM/citycat-dafni
 ###############################################################################
 def create_metadata():
-    app_title = "pyramid-dl-2-hipims"
-    app_description = "Default dataslot test output"
+    app_title = "PYRAMID FOD 2 HiPIMS Converted Data"
+    app_description = "HiPIMS-ready data converted from FOD output"
     metadata = f"""{{
       "@context": ["metadata-v1"],
       "@type": "dcat:Dataset",
@@ -203,7 +203,7 @@ def create_metadata():
       "dct:subject": "Environment",
       "dcat:theme":[],
       "dct:language": "en",
-      "dcat:keyword": ["PYRAMID"],
+      "dcat:keyword": ["PYRAMID", "HiPIMS", "Floating Objects"],
       "dct:conformsTo": {{
         "@id": null,
         "@type": "dct:Standard",
@@ -238,8 +238,8 @@ def create_metadata():
       }},
       "dcat:contactPoint": {{
         "@type": "vcard:Organization",
-        "vcard:fn": "DAFNI",
-        "vcard:hasEmail": "support@dafni.ac.uk"
+        "vcard:fn": "Robin Wardle",
+        "vcard:hasEmail": "robin.wardle@newcastle.ac.uk"
       }},
       "dct:license": {{
         "@type": "LicenseDocument",
