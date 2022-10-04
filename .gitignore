@@ -1,2 +1,5 @@
 # Data files associated with processing and DAFNI
 data/
+
+# OS and Application files
+**/*.swp

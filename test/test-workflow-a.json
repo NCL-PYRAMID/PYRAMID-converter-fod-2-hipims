@@ -1,0 +1,43 @@
+{
+    "definition": {
+        "api_version": "v1beta",
+        "kind": "W",
+        "metadata": {
+            "name": "pyramid-test-converter-fod-2-hipims-a",
+            "display_name": "PYRAMID <TEST> FOD to HiPIMS Workflow A",
+            "summary": "Workflow for testing FOD to HiPIMS converter - A",
+            "description": "This test workflow runs the FOD 2 HiPIMS converter for PYRAMID, using the raw (unzipped) data produced by the FOD model, using the default FOD ML model and data.",
+            "publisher": "Newcastle University"
+        },
+        "version_message": "v0.3.0",
+        "parent": "a2312ccd-a21d-46c2-8ed2-2d8e97d636d7",
+        "spec": {
+            "steps": [
+                {
+                    "kind": "model",
+                    "name": "fod",
+                    "inputs": [],
+                    "model_version": "396a54e4-7041-4887-9fb6-94f374f11f76"
+                },
+                {
+                    "kind": "publisher",
+                    "name": "publish",
+                    "files": [
+                        {
+                            "step": "fod",
+                            "paths": [
+                                "outputs/*"
+                            ]
+                        }
+                    ],
+                    "metadata": {
+                        "from_file": {
+                            "path": "outputs/metadata.json",
+                            "step": "fod"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}
